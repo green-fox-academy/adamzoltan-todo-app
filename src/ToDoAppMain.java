@@ -11,14 +11,18 @@ public class ToDoAppMain {
 
   public static void main(String[] args) {
 
-    System.out.println("Python Todo application\n" +
-            "=======================\n" +
-            "\n" +
-            "Command line arguments:\n" +
-            " -l   Lists all the tasks\n" +
-            " -a   Adds a new task\n" +
-            " -r   Removes an task\n" +
-            " -c   Completes an task");
+    if (args.length == 0) {
+      System.out.println("Python Todo application\n" +
+              "=======================\n" +
+              "\n" +
+              "Command line arguments:\n" +
+              " -l   Lists all the tasks\n" +
+              " -a   Adds a new task\n" +
+              " -r   Removes an task\n" +
+              " -c   Completes an task");
+    }else if (args[0].equals("-l")) {
+      processData(readLinesFromFile());
+    }
 
   }
 
@@ -34,6 +38,12 @@ public class ToDoAppMain {
     }
 
     return rawLines;
+  }
+
+  private static void processData (List<String> rawLines) {
+    for(int i = 0; i < rawLines.size(); i++) {
+      System.out.println((i +1) + " - " + rawLines.get(i));
+    }
   }
 
 }
