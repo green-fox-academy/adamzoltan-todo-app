@@ -12,7 +12,7 @@ public class ToDoAppMain {
   public static void main(String[] args) {
 
     if (args.length == 0) {
-      System.out.println("Python Todo application\n" +
+      System.out.println("JAVA Todo application\n" +
               "=======================\n" +
               "\n" +
               "Command line arguments:\n" +
@@ -20,9 +20,11 @@ public class ToDoAppMain {
               " -a   Adds a new task\n" +
               " -r   Removes an task\n" +
               " -c   Completes an task");
-    }else if (args[0].equals("-l")) {
+    } else if (args[0].equals("-l") && readLinesFromFile().size() > 0) {
       processData(readLinesFromFile());
-    }
+    } else if (args[0].equals("-l")) {
+          System.out.println("No todos for today! :)");
+        }
 
   }
 
