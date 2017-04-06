@@ -30,7 +30,7 @@ public class ToDoAppMain {
     } else if (args[0].equals("-a") && args.length == 1 ) {
         System.out.println("Unable to add: no task provided");
     } else if (args[0].equals("-r") ) {
-        removeTask(Integer.parseInt(args[1]));
+        writeToFile(removeTask(Integer.parseInt(args[1])));
     }
 
   }
@@ -64,8 +64,11 @@ public class ToDoAppMain {
     }
   }
 
-  private static void  removeTask(int taskNumber) {
-    readLinesFromFile().remove(taskNumber - 1);
+  private static ArrayList<String>  removeTask(int taskNumber) {
+    ArrayList <String> newTaskList = new ArrayList<>();
+    newTaskList.addAll(readLinesFromFile());
+    newTaskList.remove(taskNumber - 1);
+    return newTaskList;
   }
 
 
