@@ -22,11 +22,15 @@ public class ToDoAppMain {
               " -r   Removes an task\n" +
               " -c   Completes an task");
     } else if (args[0].equals("-l") && readLinesFromFile().size() > 0) {
-      processData(readLinesFromFile());
+        processData(readLinesFromFile());
     } else if (args[0].equals("-l")) {
-          System.out.println("No todos for today! :)");
-    }  else if (args[0].equals("-a") && args.length == 1 ) {
-      System.out.println("Unable to add: no task provided");
+        System.out.println("No todos for today! :)");
+    } else if (args[0].equals("-a") && args.length == 2 ) {
+        writeToFile(addToList(args[1]));
+    } else if (args[0].equals("-a") && args.length == 1 ) {
+        System.out.println("Unable to add: no task provided");
+    } else if (args[0].equals("-r") ) {
+        removeTask(Integer.parseInt(args[1]));
     }
 
   }
@@ -44,18 +48,26 @@ public class ToDoAppMain {
     return rawLines;
   }
 
-  private static void addtoList(ArrayList<String> todolist, String newToDO) {
-    todolist.add(newToDO);
+  private static ArrayList<String> addToList(String newTask) {
+    ArrayList <String> newTaskList = new ArrayList<>();
+    newTaskList.addAll(readLinesFromFile());
+    newTaskList.add(newTask);
+    return  newTaskList;
   }
 
-  private static void writeToFile(ArrayList<String> newlist) {
+  private static void writeToFile(ArrayList<String> newList) {
     Path path = Paths.get(FILE_NAME);
     try {
-      Files.write(path,newlist);
+      Files.write(path, newList);
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
+
+  private static void  removeTask(int taskNumber) {
+    readLinesFromFile().remove(taskNumber - 1);
+  }
+
 
   private static void processData (List<String> rawLines) {
     for(int i = 0; i < rawLines.size(); i++) {
