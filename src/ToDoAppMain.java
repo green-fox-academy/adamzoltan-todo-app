@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ToDoAppMain {
@@ -24,14 +25,15 @@ public class ToDoAppMain {
       processData(readLinesFromFile());
     } else if (args[0].equals("-l")) {
           System.out.println("No todos for today! :)");
-        }
+    }  else if (args[0].equals("-a") && args.length == 1 ) {
+      System.out.println("Unable to add: no task provided");
+    }
 
   }
 
   private static List<String> readLinesFromFile() {
     Path path = Paths.get(FILE_NAME);
     List<String> rawLines;
-
     try {
       rawLines = Files.readAllLines(path);
     } catch (IOException e) {
@@ -40,6 +42,19 @@ public class ToDoAppMain {
     }
 
     return rawLines;
+  }
+
+  private static void addtoList(ArrayList<String> todolist, String newToDO) {
+    todolist.add(newToDO);
+  }
+
+  private static void writeToFile(ArrayList<String> newlist) {
+    Path path = Paths.get(FILE_NAME);
+    try {
+      Files.write(path,newlist);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   private static void processData (List<String> rawLines) {
