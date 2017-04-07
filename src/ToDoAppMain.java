@@ -11,8 +11,8 @@ public class ToDoAppMain {
 
   public static void main(String[] args) {
 
-    if (args.length == 0) {
-      System.out.println("JAVA Todo application\n" +
+    if (args.length == 0 || args[0].equals("help")) {
+      System.out.println("\nJAVA Todo application\n" +
               "=======================\n" +
               "\n" +
               "Command line arguments:\n" +
