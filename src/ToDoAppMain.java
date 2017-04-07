@@ -22,7 +22,7 @@ public class ToDoAppMain {
               " -a   Adds a new task\n" +
               " -r   Removes a task\n" +
               " -c   Completes a task");
-    } else if (!args[0].equals("-l") || !args[0].equals("-a") || !args[0].equals("-r") || !args[0].equals("-c") || !args[0].equals("help")) {
+    } else if (args.length == 1 && !(args[0].equals("-l") || args[0].equals("-a") || args[0].equals("-r") || args[0].equals("-c") || args[0].equals("help"))) {
       System.out.println("Unsupported argument");
     } else if (args[0].equals("-l") && readLinesFromFile().size() > 0) {
       processData(readLinesFromFile());
