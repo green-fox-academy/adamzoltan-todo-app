@@ -36,8 +36,9 @@ public class ToDoAppMain {
     } else if (args[0].equals("-r") && args.length == 2 ) {
       writeToFile(removeTask(Integer.parseInt(args[1])));
       processData(readLinesFromFile());
-    } else if ((args[0].equals("-c"))) {
+    } else if (args[0].equals("-c")) {
       checkTask(Integer.parseInt(args[1]));
+      processData(readLinesFromFile());
     }
 
   }
@@ -80,7 +81,10 @@ public class ToDoAppMain {
   private static void checkTask (int n) {
     ArrayList <String> checkTaskList = new ArrayList<>();
     checkTaskList.addAll(readLinesFromFile());
-    checkTaskList.get(n-1).replace(' ','x');
+    String sub = "";
+    sub = checkTaskList.get(n-1).substring(4,checkTaskList.get(n-1).length());
+    sub = "[x] " + sub ;
+    checkTaskList.set(n-1, sub);
     writeToFile(checkTaskList);
   }
 
