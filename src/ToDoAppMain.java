@@ -1,3 +1,4 @@
+import com.sun.deploy.panel.AbstractRadioPropertyGroup;
 import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.io.IOException;
@@ -21,8 +22,9 @@ public class ToDoAppMain {
               " -l   Lists all the tasks\n" +
               " -a   Adds a new task\n" +
               " -r   Removes a task\n" +
-              " -c   Completes a task");
-    } else if (args.length == 1 && !(args[0].equals("-l") || args[0].equals("-a") || args[0].equals("-r") || args[0].equals("-c") || args[0].equals("help"))) {
+              " -c   Completes a task\n" +
+              " -m   Motivational quote");
+    } else if (args.length == 1 && !(args[0].equals("-l") || args[0].equals("-a") || args[0].equals("-r") || args[0].equals("-c") || args[0].equals("-m") || args[0].equals("help"))) {
       System.out.println("Unsupported argument");
     } else if (args[0].equals("-l") && readLinesFromFile().size() > 0) {
       processData(readLinesFromFile());
@@ -43,6 +45,8 @@ public class ToDoAppMain {
     } else if (args[0].equals("-c")) {
       checkTask(Integer.parseInt(args[1]));
       processData(readLinesFromFile());
+    } else if (args[0].equals("-m")) {
+      motivateMe();
     }
 
   }
@@ -90,6 +94,20 @@ public class ToDoAppMain {
     sub = "[x] " + sub ;
     checkTaskList.set(n-1, sub);
     writeToFile(checkTaskList);
+  }
+
+  public static void motivateMe () {
+    ArrayList<String> motivation = new ArrayList<>();
+    motivation.add("Your eyes can deceive you; don't trust them.");
+    motivation.add("In my experience, there is no such thing as luck.");
+    motivation.add("Now, be brave and don't look back. Don't look back.");
+    motivation.add("May the Force be with You!");
+    motivation.add("Try not. Do-or do not. There is no try.");
+    motivation.add("Train yourself to let go of everything you fear to lose.");
+    motivation.add("Fear leads to anger, anger leads to hate, hate leads to suffering.");
+    motivation.add("Let go of your hate.");
+    int r = (int)(Math.random()*8);
+    System.out.println("\\ " + motivation.get(r) + " \\");
   }
 
   private static void processData (List<String> rawLines) {
